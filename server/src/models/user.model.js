@@ -16,10 +16,12 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     salt: {
       type: String,
       required: true,
+      select: false,
     },
   },
   modelOptions
@@ -41,6 +43,6 @@ userSchema.methods.validPassword = function (password) {
   return this.password === hash;
 };
 
-const userModel = mongoose.model("User", userSchema)
+const userModel = mongoose.model("User", userSchema);
 
-export default userModel
+export default userModel;
