@@ -1,5 +1,5 @@
-import responseHandler from "../handlers/response.handler";
-import tmdbApi from "../tmdb/tmdb.api";
+import responseHelper from "../helpers/response.helper.js";
+import tmdbApi from "../tmdb/tmdb.api.js";
 
 const personDetail = async (req, res) => {
   try {
@@ -7,9 +7,9 @@ const personDetail = async (req, res) => {
 
     const person = await tmdbApi.personDetail({ personId });
 
-    responseHandler.ok(res, person);
+    responseHelper.ok(res, person);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -19,9 +19,9 @@ const personMedias = async (req, res) => {
 
     const medias = await tmdbApi.personMedias({ personId });
 
-    responseHandler.ok(res, medias);
+    responseHelper.ok(res, medias);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 

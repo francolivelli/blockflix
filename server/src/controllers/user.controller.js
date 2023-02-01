@@ -1,6 +1,6 @@
-import userModel from "../models/userModel";
+import userModel from "../models/user.model.js";
 import jsonwebtoken from "jsonwebtoken";
-import responseHandler from "../handlers/response.handler";
+import responseHelper from "../helpers/response.helper.js";
 
 const signUp = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ const signUp = async (req, res) => {
     const checkUser = await userModel.findOne({ username });
 
     if (checkUser)
-      return responseHandler.badRequest(res, "This username already exists");
+      return responseHelper.badRequest(res, "This username already exists");
 
     const user = new userModel();
 
@@ -25,13 +25,13 @@ const signUp = async (req, res) => {
       { expiresIn: "24h" }
     );
 
-    responseHandler.created(res, {
+    responseHelper.created(res, {
       token,
       ...user._doc,
       id: user.id,
     });
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -43,10 +43,10 @@ const signIn = async (req, res) => {
       .findOne({ username })
       .select("username password salt id displayName");
 
-    if (!user) return responseHandler.badRequest(res, "User don't exists");
+    if (!user) return responseHelper.badRequest(res, "User don't exists");
 
     if (!user.validPassword(password))
-      return responseHandler.badRequest(res, "Wrong password");
+      return responseHelper.badRequest(res, "Wrong password");
 
     const token = jsonwebtoken.sign(
       { data: user.id },
@@ -57,13 +57,13 @@ const signIn = async (req, res) => {
     user.password = undefined;
     user.salt = undefined;
 
-    responseHandler.created(res, {
+    responseHelper.created(res, {
       token,
       ...user._doc,
       id: user.id,
     });
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -75,18 +75,18 @@ const updatePassword = async (req, res) => {
       .findById(req.user.id)
       .select("password id salt");
 
-    if (!user) return responseHandler.unauthorized(res);
+    if (!user) return responseHelper.unauthorized(res);
 
     if (!user.validPassword(password))
-      return responseHandler.badRequest(res, "Wrong password");
+      return responseHelper.badRequest(res, "Wrong password");
 
     user.setPassword(newPassword);
 
     await user.save();
 
-    responseHandler.ok(res);
+    responseHelper.ok(res);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -94,11 +94,11 @@ const getInfo = async (req, res) => {
   try {
     const user = await userModel.findById(req.user.id);
 
-    if (!user) return responseHandler.notFound(res);
+    if (!user) return responseHelper.notFound(res);
 
-    responseHandler.ok(res, user);
+    responseHelper.ok(res, user);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 

@@ -1,5 +1,5 @@
-import responseHandler from "../handlers/response.handler";
-import favoriteModel from "../models/favorite.model";
+import responseHelper from "../helpers/response.helper.js";
+import favoriteModel from "../models/favorite.model.js";
 
 const addFavorite = async (req, res) => {
   try {
@@ -8,7 +8,7 @@ const addFavorite = async (req, res) => {
       mediaId: req.body.mediaId,
     });
 
-    if (isFavorite) return responseHandler.ok(res, isFavorite);
+    if (isFavorite) return responseHelper.ok(res, isFavorite);
 
     const favorite = new favoriteModel({
       ...req.body,
@@ -17,9 +17,9 @@ const addFavorite = async (req, res) => {
 
     await favorite.save();
 
-    responseHandler.created(res, favorite);
+    responseHelper.created(res, favorite);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -32,13 +32,13 @@ const removeFavorite = async (req, res) => {
       _id: favoriteId,
     });
 
-    if (!favorite) return responseHandler.notFound(res);
+    if (!favorite) return responseHelper.notFound(res);
 
     await favorite.remove();
 
-    responseHandler.ok(res);
+    responseHelper.ok(res);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -48,9 +48,9 @@ const getFavoritesOfUser = async (req, res) => {
       .find({ user: req.user.id })
       .sort("-createdAt");
 
-    responseHandler.ok(res, favorites);
+    responseHelper.ok(res, favorites);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 

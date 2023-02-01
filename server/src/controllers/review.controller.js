@@ -1,5 +1,5 @@
-import responseHandler from "../handlers/response.handler";
-import reviewModel from "../models/review.model";
+import responseHelper from "../helpers/response.helper.js";
+import reviewModel from "../models/review.model.js";
 
 const create = async (req, res) => {
   try {
@@ -13,13 +13,13 @@ const create = async (req, res) => {
 
     await review.save();
 
-    responseHandler.created(res, {
+    responseHelper.created(res, {
       ...review._doc,
       id: review.id,
       user: req.user,
     });
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -31,13 +31,13 @@ const remove = async (req, res) => {
       user: req.user.id,
     });
 
-    if (!review) return responseHandler.notFound(res);
+    if (!review) return responseHelper.notFound(res);
 
     await review.remove();
 
-    responseHandler.ok(res);
+    responseHelper.ok(res);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -49,9 +49,9 @@ const getReviewsOfUser = async (req, res) => {
       })
       .sort("-createdAt");
 
-    responseHandler.ok(res, reviews);
+    responseHelper.ok(res, reviews);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 

@@ -1,9 +1,9 @@
-import responseHandler from "../handlers/response.handler";
-import tmdbApi from "../tmdb/tmdb.api";
-import userModel from "../models/user.model";
-import favoriteModel from "../models/favorite.model";
-import reviewModel from "../models/review.model";
-import tokenMiddleware from "../middlewares/token.middleware";
+import responseHelper from "../helpers/response.helper.js";
+import tmdbApi from "../tmdb/tmdb.api.js";
+import userModel from "../models/user.model.js";
+import favoriteModel from "../models/favorite.model.js";
+import reviewModel from "../models/review.model.js";
+import tokenMiddleware from "../middlewares/token.middleware.js";
 
 const getList = async (req, res) => {
   try {
@@ -16,9 +16,9 @@ const getList = async (req, res) => {
       page,
     });
 
-    return responseHandler.ok(res, response);
+    return responseHelper.ok(res, response);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -28,9 +28,9 @@ const getGenres = async (req, res) => {
 
     const response = await tmdbApi.mediaGenres({ mediaType });
 
-    return responseHandler.ok(res, response);
+    return responseHelper.ok(res, response);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -45,9 +45,9 @@ const search = async (req, res) => {
       mediaType: mediaType === "people" ? "person" : mediaType,
     });
 
-    responseHandler.ok(res, response);
+    responseHelper.ok(res, response);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
@@ -90,9 +90,9 @@ const getDetail = async (req, res) => {
       .populate("user")
       .sort("-createdAt");
 
-    responseHandler.ok(res, media);
+    responseHelper.ok(res, media);
   } catch {
-    responseHandler.error(res);
+    responseHelper.error(res);
   }
 };
 
