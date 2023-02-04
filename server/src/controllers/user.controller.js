@@ -9,7 +9,7 @@ const signup = async (req, res) => {
     const checkUser = await userModel.findOne({ username });
 
     if (checkUser)
-      return responseHelper.badrequest(res, "username already used");
+      return responseHelper.badRequest(res, "username already used");
 
     const user = new userModel();
 
@@ -43,10 +43,10 @@ const signin = async (req, res) => {
       .findOne({ username })
       .select("username password salt id displayName");
 
-    if (!user) return responseHelper.badrequest(res, "User not exist");
+    if (!user) return responseHelper.badRequest(res, "User not exist");
 
     if (!user.validPassword(password))
-      return responseHelper.badrequest(res, "Wrong password");
+      return responseHelper.badRequest(res, "Wrong password");
 
     const token = jsonwebtoken.sign(
       { data: user.id },
@@ -75,10 +75,10 @@ const updatePassword = async (req, res) => {
       .findById(req.user.id)
       .select("password id salt");
 
-    if (!user) return responseHelper.unauthorize(res);
+    if (!user) return responseHelper.unauthorized(res);
 
     if (!user.validPassword(password))
-      return responseHelper.badrequest(res, "Wrong password");
+      return responseHelper.badRequest(res, "Wrong password");
 
     user.setPassword(newPassword);
 
@@ -94,7 +94,7 @@ const getInfo = async (req, res) => {
   try {
     const user = await userModel.findById(req.user.id);
 
-    if (!user) return responseHelper.notfound(res);
+    if (!user) return responseHelper.notFound(res);
 
     responseHelper.ok(res, user);
   } catch {
