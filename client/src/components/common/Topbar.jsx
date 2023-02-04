@@ -18,6 +18,7 @@ import { themeModes } from "../../configs/theme.configs";
 import { setAuthModalOpen } from "../../redux/features/authModelSlice";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
 import Logo from "./Logo";
+import UserMenu from "./UserMenu";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -111,6 +112,11 @@ const Topbar = () => {
               </IconButton>
             </Box>
             {/* main menu */}
+
+
+            {/* user menu */}
+            <UserMenu />
+            {/* user menu */}
           </Toolbar>
         </AppBar>
       </ScrollAppBar>
