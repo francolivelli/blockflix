@@ -1,34 +1,37 @@
-import privateClient from "../client/private.client.js";
-import publicClient from "../client/public.client.js";
+import privateClient from "../client/private.client";
+import publicClient from "../client/public.client";
 
 const userEndpoints = {
-  signIn: "user/signin",
-  signUp: "user/signup",
+  signin: "user/signin",
+  signup: "user/signup",
   getInfo: "user/info",
   passwordUpdate: "user/update-password",
 };
 
 const userApi = {
-  signIn: async ({ username, password }) => {
+  signin: async ({ username, password }) => {
     try {
-      const response = await publicClient.post(userEndpoints.signIn, {
+      console.log("send request");
+      const response = await publicClient.post(userEndpoints.signin, {
         username,
         password,
       });
 
       return { response };
     } catch (err) {
+      console.log("err");
       return { err };
     }
   },
-  signUp: async ({ username, password, confirmPassword, displayName }) => {
+  signup: async ({ username, password, confirmPassword, displayName }) => {
     try {
-      const response = await publicClient.post(userEndpoints.signUp, {
+      const response = await publicClient.post(userEndpoints.signup, {
         username,
         password,
         confirmPassword,
         displayName,
       });
+
       return { response };
     } catch (err) {
       return { err };

@@ -7,9 +7,9 @@ import favoriteValidator from "../validators/favorite.validator.js";
 
 const router = express.Router();
 
-router.post("/signup", userValidator.validateSignUp, userController.signUp);
+router.post("/signup", userValidator.validateSignup, userController.signup);
 
-router.post("/signIn", userValidator.validateSignIn, userController.signIn);
+router.post("/signin", userValidator.validateSignin, userController.signin);
 
 router.put(
   "/update-password",

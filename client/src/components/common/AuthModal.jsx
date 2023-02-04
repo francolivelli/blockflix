@@ -1,14 +1,14 @@
 import { Box, Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthModalOpen } from "../../redux/features/authModelSlice";
+import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import Logo from "./Logo";
-import SignInForm from "./SignInForm";
-import SignUpForm from "./SignUpForm";
+import SigninForm from "./SigninForm";
+import SignupForm from "./SignupForm";
 
 const actionState = {
-  signIn: "signIn",
-  signUp: "signUp",
+  signin: "signin",
+  signup: "signup",
 };
 
 const AuthModal = () => {
@@ -16,10 +16,10 @@ const AuthModal = () => {
 
   const dispatch = useDispatch();
 
-  const [action, setAction] = useState(actionState.signIn);
+  const [action, setAction] = useState(actionState.signin);
 
   useEffect(() => {
-    if (authModalOpen) setAction(actionState.signIn);
+    if (authModalOpen) setAction(actionState.signin);
   }, [authModalOpen]);
 
   const handleClose = () => dispatch(setAuthModalOpen(false));
@@ -48,14 +48,16 @@ const AuthModal = () => {
           <Box sx={{ textAlign: "center", marginBottom: "2rem" }}>
             <Logo />
           </Box>
-          {action === actionState.signIn && (
-            <SignInForm
-              switchAuthState={() => switchAuthState(actionState.signUp)}
+
+          {action === actionState.signin && (
+            <SigninForm
+              switchAuthState={() => switchAuthState(actionState.signup)}
             />
           )}
-          {action === actionState.signUp && (
-            <SignUpForm
-              switchAuthState={() => switchAuthState(actionState.signIn)}
+
+          {action === actionState.signup && (
+            <SignupForm
+              switchAuthState={() => switchAuthState(actionState.signin)}
             />
           )}
         </Box>

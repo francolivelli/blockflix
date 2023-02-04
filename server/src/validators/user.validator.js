@@ -1,7 +1,7 @@
 import { check } from "express-validator";
 import requestHelper from "../helpers/request.helper.js";
 
-const validateSignUp = [
+const validateSignup = [
   check("username")
     .exists()
     .withMessage("username is required")
@@ -36,7 +36,7 @@ const validateSignUp = [
   },
 ];
 
-const validateSignIn = [
+const validateSignin = [
   check("username")
     .exists()
     .withMessage("username is required")
@@ -78,4 +78,4 @@ const validateUpdatePassword = [
   },
 ];
 
-export default { validateSignUp, validateSignIn, validateUpdatePassword };
+export default { validateSignup, validateSignin, validateUpdatePassword };

@@ -2,14 +2,14 @@ import userModel from "../models/user.model.js";
 import jsonwebtoken from "jsonwebtoken";
 import responseHelper from "../helpers/response.helper.js";
 
-const signUp = async (req, res) => {
+const signup = async (req, res) => {
   try {
     const { username, password, displayName } = req.body;
 
     const checkUser = await userModel.findOne({ username });
 
     if (checkUser)
-      return responseHelper.badRequest(res, "This username already exists");
+      return responseHelper.badrequest(res, "username already used");
 
     const user = new userModel();
 
@@ -35,7 +35,7 @@ const signUp = async (req, res) => {
   }
 };
 
-const signIn = async (req, res) => {
+const signin = async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -43,10 +43,10 @@ const signIn = async (req, res) => {
       .findOne({ username })
       .select("username password salt id displayName");
 
-    if (!user) return responseHelper.badRequest(res, "User does not exist");
+    if (!user) return responseHelper.badrequest(res, "User not exist");
 
     if (!user.validPassword(password))
-      return responseHelper.badRequest(res, "Wrong password");
+      return responseHelper.badrequest(res, "Wrong password");
 
     const token = jsonwebtoken.sign(
       { data: user.id },
@@ -75,10 +75,10 @@ const updatePassword = async (req, res) => {
       .findById(req.user.id)
       .select("password id salt");
 
-    if (!user) return responseHelper.unauthorized(res);
+    if (!user) return responseHelper.unauthorize(res);
 
     if (!user.validPassword(password))
-      return responseHelper.badRequest(res, "Wrong password");
+      return responseHelper.badrequest(res, "Wrong password");
 
     user.setPassword(newPassword);
 
@@ -94,7 +94,7 @@ const getInfo = async (req, res) => {
   try {
     const user = await userModel.findById(req.user.id);
 
-    if (!user) return responseHelper.notFound(res);
+    if (!user) return responseHelper.notfound(res);
 
     responseHelper.ok(res, user);
   } catch {
@@ -103,8 +103,8 @@ const getInfo = async (req, res) => {
 };
 
 export default {
-  signUp,
-  signIn,
+  signup,
+  signin,
   getInfo,
   updatePassword,
 };
