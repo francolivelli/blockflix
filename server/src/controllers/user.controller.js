@@ -43,7 +43,7 @@ const signIn = async (req, res) => {
       .findOne({ username })
       .select("username password salt id displayName");
 
-    if (!user) return responseHelper.badRequest(res, "User don't exists");
+    if (!user) return responseHelper.badRequest(res, "User does not exist");
 
     if (!user.validPassword(password))
       return responseHelper.badRequest(res, "Wrong password");
