@@ -5,7 +5,6 @@ import MediaDetail from "../pages/MediaDetail";
 import MediaList from "../pages/MediaList";
 import MediaSearch from "../pages/MediaSearch";
 import PasswordUpdate from "../pages/PasswordUpdate";
-import ReviewList from "../pages/ReviewList";
 import ProtectedPage from "../components/common/ProtectedPage";
 
 export const routesGen = {
@@ -52,15 +51,6 @@ const routes = [
       </ProtectedPage>
     ),
     state: "favorites",
-  },
-  {
-    path: "/reviews",
-    element: (
-      <ProtectedPage>
-        <ReviewList />
-      </ProtectedPage>
-    ),
-    state: "reviews",
   },
   {
     path: "/:mediaType",

@@ -26,7 +26,6 @@ import CastSlide from "../components/common/CastSlide";
 import MediaVideosSlide from "../components/common/MediaVideosSlide";
 import RecommendSlide from "../components/common/RecommendSlide";
 import MediaSlide from "../components/common/MediaSlide";
-// import MediaReview from "../components/common/MediaReview";
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
@@ -271,7 +270,6 @@ const MediaDetail = () => {
           )}
         </Container>
         {/* media recommendation */}
-
       </Box>
     </>
   ) : null;
