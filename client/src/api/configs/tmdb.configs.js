@@ -4,7 +4,7 @@ const mediaType = {
 };
 
 const mediaCategory = {
-  popoular: "popular",
+  popular: "popular",
   top_rated: "top_rated",
 };
 

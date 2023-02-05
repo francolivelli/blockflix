@@ -17,7 +17,7 @@ const uiConfigs = {
       },
       light: {
         backgroundImage:
-          "linear-gradient(to tight, rgba(245,245,245,1), rgba(0,0,0,0))",
+          "linear-gradient(to right, rgba(245,245,245,1), rgba(0,0,0,0))",
       },
     },
     typoLines: (lines, textAlign) => ({
@@ -41,8 +41,8 @@ const uiConfigs = {
     }),
   },
   size: {
-    sidebarWidth: "300px",
-    contentMaWidth: "1366px",
+    sidebarWith: "300px",
+    contentMaxWidth: "1366px",
   },
 };
 
