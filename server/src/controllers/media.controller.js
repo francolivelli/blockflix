@@ -2,7 +2,6 @@ import responseHelper from "../helpers/response.helper.js";
 import tmdbApi from "../tmdb/tmdb.api.js";
 import userModel from "../models/user.model.js";
 import favoriteModel from "../models/favorite.model.js";
-import reviewModel from "../models/review.model.js";
 import tokenMiddleware from "../middlewares/token.middleware.js";
 
 const getList = async (req, res) => {
@@ -84,11 +83,6 @@ const getDetail = async (req, res) => {
         media.isFavorite = isFavorite !== null;
       }
     }
-
-    media.reviews = await reviewModel
-      .find({ mediaId })
-      .populate("user")
-      .sort("-createdAt");
 
     responseHelper.ok(res, media);
   } catch {
