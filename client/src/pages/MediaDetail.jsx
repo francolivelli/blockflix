@@ -23,11 +23,12 @@ import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import { addFavorite, removeFavorite } from "../redux/features/userSlice";
 
 import CastSlide from "../components/common/CastSlide";
+import MediaVideosSlide from "../components/common/MediaVideosSlide";
 // import MediaVideosSlide from "../components/common/MediaVideosSlide";
 // import BackdropSlide from "../components/common/BackdropSlide";
 // import PosterSlide from "../components/common/PosterSlide";
 // import RecommendSlide from "../components/common/RecommendSlide";
-import MediaSlide from "../components/common/MediaSlide";
+// import MediaSlide from "../components/common/MediaSlide";
 // import MediaReview from "../components/common/MediaReview";
 
 const MediaDetail = () => {
@@ -251,6 +252,14 @@ const MediaDetail = () => {
           </Box>
         </Box>
         {/* media content */}
+
+        {/* media videos */}
+        <div ref={videoRef} style={{ paddingTop: "2rem" }}>
+          <Container header="videos">
+            <MediaVideosSlide videos={media.videos.results} />
+          </Container>
+        </div>
+        {/* media videos */}
       </Box>
     </>
   ) : null;
