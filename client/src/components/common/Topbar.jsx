@@ -45,7 +45,6 @@ const ScrollAppBar = ({ children, window }) => {
     },
   });
 };
-
 const Topbar = () => {
   const { user } = useSelector((state) => state.user);
   const { appState } = useSelector((state) => state.appState);
@@ -55,7 +54,7 @@ const Topbar = () => {
 
   const dispatch = useDispatch();
 
-  const onSwitchTheme = () => {
+  const onSwithTheme = () => {
     const theme =
       themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
     dispatch(setThemeMode(theme));
@@ -69,10 +68,7 @@ const Topbar = () => {
       <ScrollAppBar>
         <AppBar elevation={0} sx={{ zIndex: 9999 }}>
           <Toolbar
-            sx={{
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}>
+            sx={{ alignItems: "center", justifyContent: "space-between" }}>
             <Stack direction="row" spacing={1} alignItems="center">
               <IconButton
                 color="inherit"
@@ -111,7 +107,7 @@ const Topbar = () => {
                   {item.display}
                 </Button>
               ))}
-              <IconButton sx={{ color: "inherit" }} onClick={onSwitchTheme}>
+              <IconButton sx={{ color: "inherit" }} onClick={onSwithTheme}>
                 {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
                 {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
               </IconButton>
@@ -129,7 +125,6 @@ const Topbar = () => {
               )}
             </Stack>
             {user && <UserMenu />}
-            <UserMenu />
             {/* user menu */}
           </Toolbar>
         </AppBar>

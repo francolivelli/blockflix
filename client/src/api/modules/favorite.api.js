@@ -1,4 +1,4 @@
-import privateClient from "../client/private.client.js";
+import privateClient from "../client/private.client";
 
 const favoriteEndpoints = {
   list: "user/favorites",
@@ -9,17 +9,17 @@ const favoriteEndpoints = {
 const favoriteApi = {
   getList: async () => {
     try {
-      const response = await privateClient.get(favoriteEndpoints.list());
+      const response = await privateClient.get(favoriteEndpoints.list);
 
       return { response };
     } catch (err) {
       return { err };
     }
   },
-  add: async ({ madiaId, mediaType, mediaTitle, mediaPoster, mediaRate }) => {
+  add: async ({ mediaId, mediaType, mediaTitle, mediaPoster, mediaRate }) => {
     try {
-      const response = await privateClient.get(favoriteEndpoints.add, {
-        madiaId,
+      const response = await privateClient.post(favoriteEndpoints.add, {
+        mediaId,
         mediaType,
         mediaTitle,
         mediaPoster,

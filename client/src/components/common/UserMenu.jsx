@@ -1,6 +1,5 @@
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import {
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -44,25 +43,28 @@ const UserMenu = () => {
                 key={index}
                 onClick={() => setAnchorEl(null)}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText disableTypography primary={
+                <ListItemText
+                  disableTypography
+                  primary={
                     <Typography textTransform="uppercase">
-                        {item.display}
+                      {item.display}
                     </Typography>
-                }/>
+                  }
+                />
               </ListItemButton>
             ))}
             <ListItemButton
-            sx={{borderRadius: "10px"}}
-            onClick={()=> dispatch(setUser(null))}
-            >
+              sx={{ borderRadius: "10px" }}
+              onClick={() => dispatch(setUser(null))}>
               <ListItemIcon>
-                <LogoutOutlinedIcon/>
-                <ListItemText disableTypography primary={
-                    <Typography textTransform="uppercase">
-                        sign out
-                    </Typography>
-                }/>
+                <LogoutOutlinedIcon />
               </ListItemIcon>
+              <ListItemText
+                disableTypography
+                primary={
+                  <Typography textTransform="uppercase">sign out</Typography>
+                }
+              />
             </ListItemButton>
           </Menu>
         </>
