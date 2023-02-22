@@ -1,5 +1,5 @@
 import jsonwebtoken from "jsonwebtoken";
-import responseHandler from "../helpers/response.helper.js";
+import responseHelper from "../helpers/response.helper.js";
 import userModel from "../models/user.model.js";
 
 const tokenDecode = (req) => {
@@ -11,6 +11,7 @@ const tokenDecode = (req) => {
 
       return jsonwebtoken.verify(token, process.env.TOKEN_SECRET);
     }
+
     return false;
   } catch {
     return false;
@@ -20,11 +21,11 @@ const tokenDecode = (req) => {
 const auth = async (req, res, next) => {
   const tokenDecoded = tokenDecode(req);
 
-  if (!tokenDecoded) return responseHandler.unauthorized(res);
+  if (!tokenDecoded) return responseHelper.unauthorized(res);
 
   const user = await userModel.findById(tokenDecoded.data);
 
-  if (!user) return responseHandler.unauthorized(res);
+  if (!user) return responseHelper.unauthorized(res);
 
   req.user = user;
 

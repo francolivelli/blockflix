@@ -32,7 +32,7 @@ const removeFavorite = async (req, res) => {
       _id: favoriteId,
     });
 
-    if (!favorite) return responseHelper.notFound(res);
+    if (!favorite) return responseHelper.notfound(res);
 
     await favorite.remove();
 
@@ -44,11 +44,11 @@ const removeFavorite = async (req, res) => {
 
 const getFavoritesOfUser = async (req, res) => {
   try {
-    const favorites = await favoriteModel
+    const favorite = await favoriteModel
       .find({ user: req.user.id })
       .sort("-createdAt");
 
-    responseHelper.ok(res, favorites);
+    responseHelper.ok(res, favorite);
   } catch {
     responseHelper.error(res);
   }

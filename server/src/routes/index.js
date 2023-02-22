@@ -6,7 +6,7 @@ import personRoute from "./person.route.js";
 const router = express.Router();
 
 router.use("/user", userRoute);
-router.use("/:mediaType", mediaRoute);
 router.use("/person", personRoute);
+router.use("/:mediaType", mediaRoute);
 
 export default router;
